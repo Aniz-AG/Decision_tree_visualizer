@@ -12,7 +12,7 @@ affect model structure and performance on a **non-linear dataset**.
 """)
 
 ## Backend API URL
-BACKEND_URL = "http://127.0.0.1:8000/train"
+BACKEND_URL = "https://decision-tree-visualizer-7gpt.onrender.com/train"
 
 st.sidebar.header("Split Criteria")
 
@@ -99,7 +99,8 @@ if st.button("🚀 Train Decision Tree"):
         response = requests.post(
             BACKEND_URL,
             headers={"Content-Type": "application/json"},
-            json=build_payload()
+            json=build_payload(),
+            timeout=90
         )
 
     if response.status_code != 200:
