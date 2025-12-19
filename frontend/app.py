@@ -26,31 +26,32 @@ splitter = st.sidebar.selectbox(
 
 st.sidebar.header("Tree Complexity")
 
-max_depth = st.sidebar.slider(
-    "max_depth (None = unlimited)",
-    min_value=1,
+max_depth_ui = st.sidebar.slider(
+    "max_depth (0 = None / unlimited)",
+    min_value=0,
     max_value=20,
     value=5
 )
 
+
 min_samples_split = st.sidebar.slider(
     "min_samples_split",
     min_value=2,
-    max_value=20,
+    max_value=300,
     value=2
 )
 
 min_samples_leaf = st.sidebar.slider(
     "min_samples_leaf",
     min_value=1,
-    max_value=20,
+    max_value=200,
     value=1
 )
 
 max_leaf_nodes = st.sidebar.slider(
     "max_leaf_nodes (0 = None)",
     min_value=0,
-    max_value=50,
+    max_value=500,
     value=0
 )
 
@@ -82,7 +83,7 @@ def build_payload():
     return {
         "criterion": criterion,
         "splitter": splitter,
-        "max_depth": max_depth,
+        "max_depth": None if max_depth_ui == 0 else max_depth_ui,
         "min_samples_split": min_samples_split,
         "min_samples_leaf": min_samples_leaf,
         "min_weight_fraction_leaf": 0.0,
